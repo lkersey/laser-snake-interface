@@ -37,7 +37,7 @@ def get_temperatures(ID):
     times = list(ret[:, 1])
 
     #print temps, times
-    return {'probe_id': ID, 'temperaures':temps, 'timestamps':times}
+    return {'probe_id': ID, 'temperatures':temps, 'timestamps':times}
 
     
 def get_temperatures_interval(ID, time_interval):

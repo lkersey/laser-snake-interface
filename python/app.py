@@ -1,11 +1,13 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 import sql
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-@app.route("/")
+@app.route("/", methods=['GET',])
 def hello():
-    return "Hello, World!"
+    return jsonify("Hello, World!"), 200
 
 @app.route("/temperatures", methods=['GET',])
 def temps():
