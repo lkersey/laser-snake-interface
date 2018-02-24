@@ -8,6 +8,7 @@
 
 <script>
 import { getTemperatureData } from '../../utils/api'
+import moment from 'moment'
 export default {
   name: 'Home',
 
@@ -20,17 +21,29 @@ export default {
   },
 
   methods: {
+
     getData () {
       getTemperatureData().then(ret => {
         console.log(ret.data)
         this.probe = ret.data.probe_id
         this.temps = ret.data.temperatures
-        this.times = ret.data.timestamps
+        this.times = this.converTimestamp(ret.data.timestamps)
       })
         .catch(e => {
           console.log('error caught')
           console.log(e)
         })
+    },
+
+    converTimestamp (timestamp) {
+      var i = 0
+      for (i; i < timestamp.length; i++) {
+        // time is recieved in sec since epoch. Moment accepts ms
+        // since epoch
+        timestamp[i] = moment(timestamp[i] * 1000)
+          .format('dddd DD MMMM YYYY, H:mm:ss a')
+      }
+      return timestamp
     }
   },
 
