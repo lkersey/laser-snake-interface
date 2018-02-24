@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <ul>
-      <li v-for="count in temps.length-1" :key="count"> The temp was: {{ temps[count] }} at {{times[count]}} </li>
+      <li v-for="count in temps.length" :key="count"> The temp was: {{ temps[count] }} at {{times[count]}} </li>
     </ul>
   </div>
 </template>
@@ -35,8 +35,9 @@ export default {
   },
 
   created () {
-    console.log('created')
+    // console.log('created')
     this.getData()
+    this.timer = setInterval(this.getData, 60000)
   }
 
 }
