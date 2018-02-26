@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <h1> Temperature Data </h1>
-    <line-chart :chart-data="temps" :chart-labels="times"></line-chart>
+    <line-chart :chart-data="dataCollection"></line-chart>
      <!-- <ul> -->
       <!-- <li v-for="count in temps.length" :key="count"> The temp was: {{ temps[count] }} at {{times[count]}} </li> -->
     <!-- </ul> -->
@@ -23,7 +23,8 @@ export default {
     return {
       probe: '',
       temps: [],
-      times: []
+      times: [],
+      dataCollection: null
     }
   },
 
@@ -40,6 +41,7 @@ export default {
           console.log('error caught')
           console.log(e)
         })
+      this.updateDataCollection(this.times, this.temps)
     },
 
     converTimestamp (timestamp) {
@@ -51,6 +53,19 @@ export default {
           .format('dddd DD MMMM YYYY, H:mm:ss a')
       }
       return timestamp
+    },
+
+    updateDataCollection (times, temps) {
+      this.dataCollection = {
+        labels: times,
+        datasets: [
+          {
+            label: this.probe,
+            backgroundColor: '#f87979',
+            data: temps
+          }
+        ]
+      }
     }
   },
 
