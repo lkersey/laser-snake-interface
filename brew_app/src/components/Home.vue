@@ -36,12 +36,12 @@ export default {
         this.probe = ret.data.probe_id
         this.temps = ret.data.temperatures
         this.times = this.converTimestamp(ret.data.timestamps)
+        this.updateDataCollection(this.times, this.temps)
       })
         .catch(e => {
           console.log('error caught')
           console.log(e)
         })
-      this.updateDataCollection(this.times, this.temps)
     },
 
     converTimestamp (timestamp) {
