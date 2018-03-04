@@ -1,14 +1,16 @@
 <template>
   <div id="app">
+    <app-nav></app-nav>
     <router-view/>
   </div>
 </template>
 
 <script>
 import Home from '@/components/Home'
+import AppNav from '@/components/AppNav'
 export default {
   name: 'App',
-  components: {Home}
+  components: {Home, AppNav}
 }
 </script>
 
